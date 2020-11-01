@@ -1,0 +1,26 @@
+service: action-store
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: eu-central-1
+
+functions:
+  getCleanerList:
+    handler: src/cleaner-service/handler.getCleanerList
+    events:
+      - http:
+          path: cleaners
+          method: get
+
+  getCleanerById:
+    handler: src/cleaner-service/handler.getCleanerById
+    events:
+      - http:
+          path: cleaner/{cleanerId}
+          method: get
